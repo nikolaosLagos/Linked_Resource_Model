@@ -36,7 +36,7 @@
 @prefix real: <http://xrce.xerox.com/ReAL#> .
 @prefix stx: <http://xrce.xerox.com/STX#> .
 
-@base  <file:///C:/Users/viondury/PERICLESEU/Ontology/> .
+@base  <https://raw.githubusercontent.com/nikolaosLagos/Linked_Resource_Model/master/> .
 
 lrm:LRM-ReAL-schema	rdf:type owl:Ontology;
 	owl:versionInfo "1.0.1";

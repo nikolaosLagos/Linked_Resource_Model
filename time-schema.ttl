@@ -8,7 +8,7 @@
 @prefix allen: <http://xrce.xerox.com/ALLEN#>.
 @prefix time: <http://xrce.xerox.com/TIME#>.
 @prefix tz: <http://www.w3.org/2006/timezone#> .
-@base  <file:///C:/Users/viondury/PERICLESEU/Ontology/> .
+@base  <https://raw.githubusercontent.com/nikolaosLagos/Linked_Resource_Model/master/> .
 
 time:TIME-schema
     a owl:Ontology ;
