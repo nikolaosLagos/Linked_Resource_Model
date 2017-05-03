@@ -25,7 +25,7 @@
 # Authors:  Jean-Pierre Chanod, Nikolaos Lagos, Jean-Yves Vion-Dury
 #
 # Created in November 2014
-# last updated the 31th of March 2017 by Jean-Yves Vion-Dury
+# last updated the 3rd May 2017 by Jean-Yves Vion-Dury, Nikolaos Lagos
 #
 
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
@@ -39,8 +39,7 @@
 @prefix tm: <http://www.w3.org/2006/time#>.
 @prefix real: <http://xrce.xerox.com/ReAL#> .
 
-# @base  <file://localhost/C:/Users/viondury/PERICLESEU/LRMS/Data/LRM/> .
-@base  <file:///C:/Users/viondury/PERICLESEU/LRMS/Data/LRM/> .
+@base  <https://raw.githubusercontent.com/nikolaosLagos/Linked_Resource_Model/master/> .
 	
 lrm:LRM-schema
     a owl:Ontology ;
