@@ -443,24 +443,32 @@ allen:relation a owl:ObjectProperty;
 	
 allen:equals a owl:ReflexiveProperty, owl:SymmetricProperty, owl:TransitiveProperty; 
 	rdfs:subPropertyOf allen:relation;
+    rdfs:label "allen:equals";
 	rdfs:comment """ A equals B
 	 A₋ = B₋  and  A₊ =  B₊  
 	A:	|----------|
 	B:	|----------|
 	""".
         
-allen:meets a owl:AsymmetricProperty, owl:IrreflexiveProperty;
+# allen:meets a owl:AsymmetricProperty, owl:IrreflexiveProperty;
+allen:meets a  owl:IrreflexiveProperty;
 	rdfs:subPropertyOf allen:relation;
+    rdfs:label "allen:meets";
     owl:inverseOf allen:met-by;
 	rdfs:comment """  A meets B
 	A₊ =  B₋
 	A:	|----|
 	B:	         |----|
 	""".
-    
+	
+allen:met-by a  owl:IrreflexiveProperty;
+    rdfs:label "allen:met-by";
+	rdfs:subPropertyOf allen:relation.    
 
-allen:before a owl:AsymmetricProperty, owl:IrreflexiveProperty, owl:TransitiveProperty; 
+# allen:before a owl:AsymmetricProperty, owl:IrreflexiveProperty, owl:TransitiveProperty; 
+allen:before a  owl:IrreflexiveProperty, owl:TransitiveProperty; 
 	rdfs:subPropertyOf allen:relation;
+    rdfs:label "allen:before";
     owl:inverseOf allen:after;
 	rdfs:comment """ A before B
 	A₊ < B₋
@@ -469,9 +477,15 @@ allen:before a owl:AsymmetricProperty, owl:IrreflexiveProperty, owl:TransitivePr
 	"""
     .
 
+allen:after a  owl:IrreflexiveProperty, owl:TransitiveProperty; 
+    rdfs:label "allen:after";
+	rdfs:subPropertyOf allen:relation
+	.    
 
-allen:starts a owl:IrreflexiveProperty, owl:AsymmetricProperty, owl:TransitiveProperty; 
+# allen:starts a owl:IrreflexiveProperty, owl:AsymmetricProperty, owl:TransitiveProperty; 
+allen:starts a owl:IrreflexiveProperty, owl:TransitiveProperty; 
 	rdfs:subPropertyOf allen:relation;
+    rdfs:label "allen:starts";
     owl:inverseOf allen:started-by;
 	rdfs:comment """ A starts B
 	A₋  =  B₋  and  A₊  <  B₊
@@ -479,8 +493,13 @@ allen:starts a owl:IrreflexiveProperty, owl:AsymmetricProperty, owl:TransitivePr
 	B:	|-----------|
 	""".
     
+allen:started-by a owl:IrreflexiveProperty, owl:TransitiveProperty; 
+    rdfs:label "allen:started-by";
+	rdfs:subPropertyOf allen:relation
+	.
 
-allen:overlaps a owl:IrreflexiveProperty, owl:AsymmetricProperty;
+# allen:overlaps a owl:IrreflexiveProperty, owl:AsymmetricProperty;
+allen:overlaps a owl:IrreflexiveProperty;
 	rdfs:subPropertyOf allen:relation;
     rdfs:label "allen:overlaps";
     owl:inverseOf allen:overlapped-by;
@@ -490,9 +509,13 @@ allen:overlaps a owl:IrreflexiveProperty, owl:AsymmetricProperty;
 	B:            |------|
 	""".
     
+allen:overlapped-by a owl:IrreflexiveProperty;
+    rdfs:label "allen:overlapped-by";
+	rdfs:subPropertyOf allen:relation
+	.
 
-# allen:finishes a owl:ObjectProperty, owl:SymmetricProperty, owl:ReflexiveProperty, owl:TransitiveProperty; 
-allen:finishes a owl:IrreflexiveProperty, owl:AsymmetricProperty, owl:TransitiveProperty; 
+# allen:finishes a owl:IrreflexiveProperty, owl:AsymmetricProperty, owl:TransitiveProperty; 
+allen:finishes a owl:IrreflexiveProperty, owl:TransitiveProperty; 
     rdfs:label "allen:finishes";
 	rdfs:subPropertyOf allen:relation;
     owl:inverseOf allen:finished-by;
@@ -502,8 +525,13 @@ allen:finishes a owl:IrreflexiveProperty, owl:AsymmetricProperty, owl:Transitive
 	B:	|--------|
 	""".
     
+allen:finished-by a owl:IrreflexiveProperty, owl:TransitiveProperty; 
+    rdfs:label "allen:finished-by";
+	rdfs:subPropertyOf allen:relation
+	.
 
-allen:during a owl:IrreflexiveProperty, owl:AsymmetricProperty, owl:TransitiveProperty; 
+# allen:during a owl:IrreflexiveProperty, owl:AsymmetricProperty, owl:TransitiveProperty; 
+allen:during a owl:IrreflexiveProperty, owl:TransitiveProperty; 
 	rdfs:subPropertyOf allen:relation;
 	owl:equivalentProperty allen:contained-by, allen:contained-in;
     rdfs:label "allen:during";
@@ -513,5 +541,10 @@ allen:during a owl:IrreflexiveProperty, owl:AsymmetricProperty, owl:TransitivePr
 	A:	     |------|
 	B:	|--------------|
 	""".
-    
+	
+allen:contains a owl:IrreflexiveProperty, owl:TransitiveProperty; 
+    rdfs:label "allen:contains";
+	rdfs:subPropertyOf allen:relation
+    .
+	
 allen:contains owl:equivalentProperty allen:includes.
