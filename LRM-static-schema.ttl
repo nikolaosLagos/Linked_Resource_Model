@@ -219,7 +219,7 @@ lrm:location a owl:ObjectProperty;
     rdfs:subPropertyOf lrm:describedBy;
     rdfs:domain lrm:ConcreteResource;
     rdfs:range lrm:Location;
-    rdfs:comment "distinct resources cannot have the same location  descriptor(hence the inverse functional property)"@en
+    rdfs:comment "a concrete resource having a physical extension, it can therefore have a location descriptor "@en
     .
         
 lrm:accessProtocol a owl:ObjectProperty;

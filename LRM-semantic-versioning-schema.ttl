@@ -41,7 +41,7 @@
 lrm:LRM-semantic-versioning
     rdf:type owl:Ontology;
 	owl:versionInfo "2.0.0";
-    rdfs:comment """  Model semantic versioning operation using LRM dependencies"""@en.
+    rdfs:comment """  Models semantic versioning operations using LRM dependencies"""@en.
 
 # =================================================================================================
 #                                                   VERSIONING MODEL    
@@ -307,7 +307,7 @@ lrm:createDependency a lrm:EventHandler;
         lrm:body [
             real:variables "EVENT"^^real:Signature;
             real:code """ 
-                                lrm:subject(?EVENT, ?rsc) AND   ! rdf:type(?rsc, lrm:Dependency)  AND
+                                lrm:subject(?EVENT, ?rsc) AND   ! rdf:type(?rsc, lrm:Dependency)  AND 
                                 lrm:precondition(?rsc, ?PC) AND  CALL ?PC(?EVENT) AND 
                                 lrm:impact(?self, ?IP) AND  CALL  ?IP(?EVENT) 
                             """^^real:Code

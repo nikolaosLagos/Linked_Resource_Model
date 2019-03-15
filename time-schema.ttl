@@ -416,88 +416,102 @@ allen:algebra
     rdfs:seeAlso <http://en.wikipedia.org/wiki/Allen's_interval_algebra>;
     rdfs:comment
     """ Allen's interval algebra (Allen, 1983) is based on the notion of relations between pairs of
-    intervals. An interval x is represented as a tuple (x- , x+)of time instants (like reals) with x- < x+,
+    intervals. An interval x is represented as a tuple (x₋ , x₊) of time instants (like reals) with x₋ < x₊,
     denoting the left and right endpoints of the interval, respectively, and relations between intervals 
     are composed as disjunctions of 13 basic interval relations.
     """@en
     .
+	
+allen:disjunction-axiom a owl:AllDisjointProperties;
+	owl:members (
+		allen:equals 
+		allen:meets allen:met-by
+		allen:before allen:after
+		allen:starts allen:started-by
+		allen:finishes allen:finished-by
+		allen:overlaps allen:overlapped-by
+		allen:contains allen:contained-by
+		)
+	.
 
-# Problems with owl:Reflexive and owl:Symmetric as well as owl:Asymmetric reported by reasoners Pellet, Fact++, HermiT    
-# allen:equals a owl:ObjectProperty, owl:TransitiveProperty, owl:ReflexiveProperty, owl:SymmetricProperty; 
-allen:equals a owl:ObjectProperty, owl:TransitiveProperty, owl:SymmetricProperty; 
+# Problems with owl:Reflexive and owl:Symmetric as well as owl:Asymmetric wasreported by reasoners Pellet, Fact++, HermiT    
+allen:relation a owl:ObjectProperty;
 	rdfs:domain time:Interval; 
 	rdfs:range time:Interval;
+	rdfs:comment "the generic relation between two time intervals."@en
+	.
+	
+allen:equals a owl:ReflexiveProperty, owl:SymmetricProperty, owl:TransitiveProperty; 
+	rdfs:subPropertyOf allen:relation;
 	rdfs:comment """ A equals B
+	 A₋ = B₋  and  A₊ =  B₊  
 	A:	|----------|
 	B:	|----------|
 	""".
         
-allen:meets a owl:ObjectProperty, owl:AsymmetricProperty, owl:IrreflexiveProperty;
-	rdfs:domain time:Interval; 
-	rdfs:range time:Interval;
+allen:meets a owl:AsymmetricProperty, owl:IrreflexiveProperty;
+	rdfs:subPropertyOf allen:relation;
     owl:inverseOf allen:met-by;
 	rdfs:comment """  A meets B
-	A:	|------|
-	B:	        |------|
+	A₊ =  B₋
+	A:	|----|
+	B:	         |----|
 	""".
     
 
-# allen:before a owl:ObjectProperty, owl:AsymmetricProperty, owl:IrreflexiveProperty, owl:TransitiveProperty; 
-allen:before a owl:ObjectProperty, owl:TransitiveProperty; 
-	rdfs:domain time:Interval; 
-	rdfs:range time:Interval;
+allen:before a owl:AsymmetricProperty, owl:IrreflexiveProperty, owl:TransitiveProperty; 
+	rdfs:subPropertyOf allen:relation;
     owl:inverseOf allen:after;
 	rdfs:comment """ A before B
+	A₊ < B₋
 	A:	|------|
-	B:	               |------|
+	B:	                 |------|
 	"""
     .
 
 
-# allen:starts a owl:ObjectProperty, owl:SymmetricProperty, owl:ReflexiveProperty, owl:TransitiveProperty; 
-allen:starts a owl:ObjectProperty, owl:SymmetricProperty, owl:TransitiveProperty; 
-	rdfs:domain time:Interval; 
-	rdfs:range time:Interval;
+allen:starts a owl:IrreflexiveProperty, owl:AsymmetricProperty, owl:TransitiveProperty; 
+	rdfs:subPropertyOf allen:relation;
     owl:inverseOf allen:started-by;
 	rdfs:comment """ A starts B
+	A₋  =  B₋  and  A₊  <  B₊
 	A:	|------|
 	B:	|-----------|
 	""".
     
 
-allen:overlaps a owl:ObjectProperty, owl:AsymmetricProperty, owl:IrreflexiveProperty;
+allen:overlaps a owl:IrreflexiveProperty, owl:AsymmetricProperty;
+	rdfs:subPropertyOf allen:relation;
     rdfs:label "allen:overlaps";
-	rdfs:domain time:Interval; 
-	rdfs:range time:Interval;
     owl:inverseOf allen:overlapped-by;
 	rdfs:comment """ A overlaps B
-	A: 	|------|
-	B:           |------|
+	A₋ < B₋  < A₊  < B₊
+	A: 	|-----|
+	B:            |------|
 	""".
     
 
 # allen:finishes a owl:ObjectProperty, owl:SymmetricProperty, owl:ReflexiveProperty, owl:TransitiveProperty; 
-allen:finishes a owl:ObjectProperty, owl:SymmetricProperty, owl:TransitiveProperty; 
+allen:finishes a owl:IrreflexiveProperty, , owl:AsymmetricProperty, owl:TransitiveProperty; 
     rdfs:label "allen:finishes";
-	rdfs:domain time:Interval; 
-	rdfs:range time:Interval;
+	rdfs:subPropertyOf allen:relation;
     owl:inverseOf allen:finished-by;
 	rdfs:comment """ A finishes B
+	A₊  =  B₊
 	A:	    |------|
-	B:	|----------|
+	B:	|--------|
 	""".
     
 
-# allen:during a owl:ObjectProperty, owl:AsymmetricProperty, owl:IrreflexiveProperty, owl:TransitiveProperty; 
-allen:during a owl:ObjectProperty, owl:TransitiveProperty; 
+allen:during a owl:IrreflexiveProperty, owl:AsymmetricProperty, owl:TransitiveProperty; 
+	rdfs:subPropertyOf allen:relation;
+	owl:equivalentProperty allen:contained-by, allen:contained-in;
     rdfs:label "allen:during";
-	rdfs:domain time:Interval; 
-	rdfs:range time:Interval;
-    owl:inverseOf allen:includes;
+    owl:inverseOf allen:contains;
 	rdfs:comment """ A during B
-         (B- < A-  and  A+ < B+)
+         (B₋ < A₋  and  A₊ < B₊)
 	A:	     |------|
 	B:	|--------------|
 	""".
     
-
+allen:contains owl:equivalentProperty allen:includes.
