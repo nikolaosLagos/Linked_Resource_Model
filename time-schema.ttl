@@ -492,7 +492,7 @@ allen:overlaps a owl:IrreflexiveProperty, owl:AsymmetricProperty;
     
 
 # allen:finishes a owl:ObjectProperty, owl:SymmetricProperty, owl:ReflexiveProperty, owl:TransitiveProperty; 
-allen:finishes a owl:IrreflexiveProperty, , owl:AsymmetricProperty, owl:TransitiveProperty; 
+allen:finishes a owl:IrreflexiveProperty, owl:AsymmetricProperty, owl:TransitiveProperty; 
     rdfs:label "allen:finishes";
 	rdfs:subPropertyOf allen:relation;
     owl:inverseOf allen:finished-by;
