@@ -434,15 +434,14 @@ allen:disjunction-axiom a owl:AllDisjointProperties;
 		)
 	.
 
-# Problems with owl:Reflexive and owl:Symmetric as well as owl:Asymmetric wasreported by reasoners Pellet, Fact++, HermiT    
+# NB: problems with owl:Reflexive and owl:Symmetric as well as owl:Asymmetric were reported by  Pellet, Fact++, HermiT reasoners   
 allen:relation a owl:ObjectProperty;
 	rdfs:domain time:Interval; 
 	rdfs:range time:Interval;
 	rdfs:comment "the generic relation between two time intervals."@en
 	.
 	
-allen:equals a owl:ReflexiveProperty, owl:SymmetricProperty, owl:TransitiveProperty; 
-	rdfs:subPropertyOf allen:relation;
+allen:equals rdfs:subPropertyOf allen:relation;
     rdfs:label "allen:equals";
 	rdfs:comment """ A equals B
 	 A₋ = B₋  and  A₊ =  B₊  
@@ -450,9 +449,7 @@ allen:equals a owl:ReflexiveProperty, owl:SymmetricProperty, owl:TransitivePrope
 	B:	|----------|
 	""".
         
-# allen:meets a owl:AsymmetricProperty, owl:IrreflexiveProperty;
-allen:meets a  owl:IrreflexiveProperty;
-	rdfs:subPropertyOf allen:relation;
+allen:meets rdfs:subPropertyOf allen:relation;
     rdfs:label "allen:meets";
     owl:inverseOf allen:met-by;
 	rdfs:comment """  A meets B
@@ -461,13 +458,12 @@ allen:meets a  owl:IrreflexiveProperty;
 	B:	         |----|
 	""".
 	
-allen:met-by a  owl:IrreflexiveProperty;
-    rdfs:label "allen:met-by";
-	rdfs:subPropertyOf allen:relation.    
+allen:met-by rdfs:subPropertyOf allen:relation;
+	rdfs:label "allen:met-by"
+	.    
 
-# allen:before a owl:AsymmetricProperty, owl:IrreflexiveProperty, owl:TransitiveProperty; 
-allen:before a  owl:IrreflexiveProperty, owl:TransitiveProperty; 
-	rdfs:subPropertyOf allen:relation;
+	
+allen:before rdfs:subPropertyOf allen:relation;
     rdfs:label "allen:before";
     owl:inverseOf allen:after;
 	rdfs:comment """ A before B
@@ -476,15 +472,14 @@ allen:before a  owl:IrreflexiveProperty, owl:TransitiveProperty;
 	B:	                 |------|
 	"""
     .
+	
 
-allen:after a  owl:IrreflexiveProperty, owl:TransitiveProperty; 
-    rdfs:label "allen:after";
-	rdfs:subPropertyOf allen:relation
+allen:after rdfs:subPropertyOf allen:relation;
+    rdfs:label "allen:after"
 	.    
-
-# allen:starts a owl:IrreflexiveProperty, owl:AsymmetricProperty, owl:TransitiveProperty; 
-allen:starts a owl:IrreflexiveProperty, owl:TransitiveProperty; 
-	rdfs:subPropertyOf allen:relation;
+	
+ 
+allen:starts rdfs:subPropertyOf allen:relation;
     rdfs:label "allen:starts";
     owl:inverseOf allen:started-by;
 	rdfs:comment """ A starts B
@@ -493,14 +488,12 @@ allen:starts a owl:IrreflexiveProperty, owl:TransitiveProperty;
 	B:	|-----------|
 	""".
     
-allen:started-by a owl:IrreflexiveProperty, owl:TransitiveProperty; 
-    rdfs:label "allen:started-by";
-	rdfs:subPropertyOf allen:relation
+allen:started-by rdfs:subPropertyOf allen:relation; 
+    rdfs:label "allen:started-by"	
 	.
 
-# allen:overlaps a owl:IrreflexiveProperty, owl:AsymmetricProperty;
-allen:overlaps a owl:IrreflexiveProperty;
-	rdfs:subPropertyOf allen:relation;
+
+allen:overlaps rdfs:subPropertyOf allen:relation;
     rdfs:label "allen:overlaps";
     owl:inverseOf allen:overlapped-by;
 	rdfs:comment """ A overlaps B
@@ -509,15 +502,13 @@ allen:overlaps a owl:IrreflexiveProperty;
 	B:            |------|
 	""".
     
-allen:overlapped-by a owl:IrreflexiveProperty;
-    rdfs:label "allen:overlapped-by";
-	rdfs:subPropertyOf allen:relation
+allen:overlapped-by rdfs:subPropertyOf allen:relation;
+    rdfs:label "allen:overlapped-by"
 	.
 
-# allen:finishes a owl:IrreflexiveProperty, owl:AsymmetricProperty, owl:TransitiveProperty; 
-allen:finishes a owl:IrreflexiveProperty, owl:TransitiveProperty; 
-    rdfs:label "allen:finishes";
-	rdfs:subPropertyOf allen:relation;
+
+allen:finishes rdfs:subPropertyOf allen:relation; 
+    rdfs:label "allen:finishes";	
     owl:inverseOf allen:finished-by;
 	rdfs:comment """ A finishes B
 	A₊  =  B₊
@@ -525,14 +516,12 @@ allen:finishes a owl:IrreflexiveProperty, owl:TransitiveProperty;
 	B:	|--------|
 	""".
     
-allen:finished-by a owl:IrreflexiveProperty, owl:TransitiveProperty; 
-    rdfs:label "allen:finished-by";
-	rdfs:subPropertyOf allen:relation
+allen:finished-by rdfs:subPropertyOf allen:relation; 
+    rdfs:label "allen:finished-by"
 	.
 
-# allen:during a owl:IrreflexiveProperty, owl:AsymmetricProperty, owl:TransitiveProperty; 
-allen:during a owl:IrreflexiveProperty, owl:TransitiveProperty; 
-	rdfs:subPropertyOf allen:relation;
+
+allen:during rdfs:subPropertyOf allen:relation;
 	owl:equivalentProperty allen:contained-by, allen:contained-in;
     rdfs:label "allen:during";
     owl:inverseOf allen:contains;
@@ -542,9 +531,25 @@ allen:during a owl:IrreflexiveProperty, owl:TransitiveProperty;
 	B:	|--------------|
 	""".
 	
-allen:contains a owl:IrreflexiveProperty, owl:TransitiveProperty; 
-    rdfs:label "allen:contains";
-	rdfs:subPropertyOf allen:relation
+allen:contains rdfs:subPropertyOf allen:relation; 
+	owl:equivalentProperty allen:includes;
+    rdfs:label "allen:contains"
     .
-	
-allen:contains owl:equivalentProperty allen:includes.
+
+#----------------------------------------------------------------------------------------------
+# Property Axioms that put HERMIT reasonner in trouble
+#----------------------------------------------------------------------------------------------
+
+# allen:equals a owl:ReflexiveProperty, owl:SymmetricProperty, owl:TransitiveProperty.
+# allen:meets a owl:AsymmetricProperty, owl:IrreflexiveProperty.
+# allen:met-by a owl:AsymmetricProperty, owl:IrreflexiveProperty.
+# allen:before a owl:AsymmetricProperty, owl:IrreflexiveProperty, owl:TransitiveProperty.
+# allen:after a  owl:AsymmetricProperty, owl:IrreflexiveProperty, owl:TransitiveProperty.
+# allen:starts a owl:IrreflexiveProperty, owl:AsymmetricProperty, owl:TransitiveProperty.
+# allen:started-by a owl:IrreflexiveProperty, owl:AsymmetricProperty, owl:TransitiveProperty.
+# allen:overlaps a owl:IrreflexiveProperty, owl:AsymmetricProperty.
+# allen:overlapped-by a owl:IrreflexiveProperty, owl:AsymmetricProperty.
+# allen:finishes a owl:IrreflexiveProperty, owl:AsymmetricProperty, owl:TransitiveProperty.
+# allen:finished-by a owl:IrreflexiveProperty, owl:AsymmetricProperty, owl:TransitiveProperty.
+# allen:during a owl:IrreflexiveProperty, owl:AsymmetricProperty, owl:TransitiveProperty.
+# allen:contains a owl:IrreflexiveProperty, owl:AsymmetricProperty, owl:TransitiveProperty.
